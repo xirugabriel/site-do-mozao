@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nosso Cantinho ❤️</title>
+
+  <!-- Conecta o CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Cabeçalho do site -->
+  <header>
+    <h1>Nosso Cantinho ❤️</h1>
+    <p>Um pedacinho do nosso amor guardado aqui</p>
+  </header>
+
+   <!-- Tempo que estamos juntos -->
+  <section class="tempo-juntos">
+    <h2>Tempo que estamos juntos ⏱️</h2>
+    <p id="tempo-juntos-texto">
+      carregando...
+    </p>
+  </section>
+
+  <!-- Galeria de fotos -->
+  <section class="galeria">
+    <img src="foto1.jpg" alt="Foto 1">
+    <img src="foto2.jpg" alt="Foto 2">
+    <img src="foto3.jpg" alt="Foto 3">
+    <img src="foto4.jpg" alt="Foto 4">
+  </section>
+
+  <!-- Mensagem -->
+  <section class="mensagem">
+    <h2>Para você, meu amor 💕</h2>
+    <p>
+      Cada momento ao seu lado é único.  
+      Esse site é só um lembrete do quanto você é especial pra mim.
+    </p>
+    <p>
+      Obrigado por tudo que temos vivido juntos.  
+      TE AMO ❤️
+    </p>
+  </section>
+
+  <!-- Rodapé -->
+  <footer>
+    Feito com ❤️ por mim, especialmente para você.
+  </footer>
+
+  <script>
+    // 🔴 TROQUE A DATA AQUI PELA DE VOCÊS
+    const inicio = new Date('2025-07-20T00:00:00'); 
+
+    function atualizarTempo() {
+      const agora = new Date();
+      const diffMs = agora - inicio; // diferença em milissegundos
+
+      const segundos = Math.floor(diffMs / 1000);
+      const minutos = Math.floor(segundos / 60);
+      const horas   = Math.floor(minutos / 60);
+      const dias    = Math.floor(horas / 24);
+
+      const restoHoras   = horas % 24;
+      const restoMinutos = minutos % 60;
+      const restoSeg     = segundos % 60;
+
+      const texto = `${dias} dias, ${restoHoras} horas, ${restoMinutos} minutos e ${restoSeg} segundos`;
+
+      const elemento = document.getElementById('tempo-juntos-texto');
+      if (elemento) {
+        elemento.textContent = texto;
+      }
+    }
+
+    // atualiza na hora e depois a cada 1 segundo
+    atualizarTempo();
+    setInterval(atualizarTempo, 1000);
+  </script>
+</body>
+</html>
+</body>
+</html>
