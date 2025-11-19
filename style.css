@@ -1,3 +1,110 @@
+/* ====================================== */
+/*     CÉU EM CAMADAS | PARALLAX REAL     */
+/* ====================================== */
+
+.stars-layer {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: -10;
+  background-repeat: repeat;
+  background-size: contain;
+  animation: moveStars 80s linear infinite;
+  opacity: 0.45;
+}
+
+.stars-layer.near {
+  background-image: url('https://i.imgur.com/1DnPEnk.png');
+  animation-duration: 55s;
+  opacity: 0.7;
+}
+
+.stars-layer.far {
+  background-image: url('https://i.imgur.com/OLqTusp.png');
+  animation-duration: 120s;
+  opacity: 0.25;
+}
+
+@keyframes moveStars {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-200px, -150px, 0); }
+}
+
+/* ========================================= */
+/*          TELA INICIAL DE SUSPENSE         */
+/* ========================================= */
+
+.intro-screen {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 20% 20%, #ff8ac8, #2b003d 55%, #050018 90%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  opacity: 1;
+  transition: opacity 0.8s ease;
+}
+
+.intro-screen.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.intro-card {
+  background: rgba(5, 0, 25, 0.9);
+  padding: 28px 32px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(255, 80, 170, 0.8);
+  animation: introFloat 3s ease-in-out infinite alternate;
+}
+
+.intro-card p {
+  margin: 0 0 16px;
+  font-size: 18px;
+}
+
+#btn-revelar {
+  border: none;
+  padding: 10px 24px;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(120deg, #ff7ac9, #ffb3e0);
+  color: #24001f;
+  box-shadow: 0 0 18px rgba(255, 80, 170, 0.9);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+#btn-revelar:hover {
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 0 22px rgba(255, 120, 200, 1);
+  filter: brightness(1.05);
+}
+
+/* animação de leve flutuando */
+@keyframes introFloat {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-8px); }
+}
+
+/* Conteúdo principal aparece com fade + desfoque saindo */
+.conteudo {
+  opacity: 0;
+  filter: blur(12px) scale(0.98);
+  transition: opacity 0.8s ease, filter 0.8s ease;
+}
+
+.conteudo.visible {
+  opacity: 1;
+  filter: blur(0) scale(1);
+}
+
 /* ------------------------------ */
 /*  TEMA ESCURO GALÁXIA ANIMADA   */
 /* ------------------------------ */
@@ -85,42 +192,46 @@ body::before {
   100% { transform: translate3d(-20px, 20px, 0); opacity: 0.6; }
 }
 
-/* ------------------------------ */
-/*       METEOROS (SHOOTING)      */
-/* ------------------------------ */
+/* =========================================== */
+/*        METEORO CINEMATOGRÁFICO REAL         */
+/* =========================================== */
 
 .meteor {
   position: fixed;
-  top: -15%;
   width: 2px;
-  height: 90px;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.9), transparent);
+  height: 160px;
+  pointer-events: none;
   opacity: 0;
-  transform: rotate(45deg);
   z-index: -1;
-  filter: drop-shadow(0 0 6px rgba(255,255,255,0.9));
-  animation: meteorAnimation 3s linear infinite;
+  mix-blend-mode: screen;
+
+  background: linear-gradient(
+    to top,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.25) 25%,
+    rgba(255,255,255,0.7) 70%,
+    rgba(255,255,255,1) 100%
+  );
+
+  filter:
+    blur(0.6px)
+    drop-shadow(0 0 6px rgba(255,255,255,0.9))
+    drop-shadow(0 0 12px rgba(255,255,255,0.7));
+
+  transform-origin: bottom center;
+
+  .meteor-particle {
+  position: fixed;
+  width: 3px;
+  height: 3px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  z-index: -2;
+  filter: blur(1px);
 }
 
-.meteor:nth-of-type(4) {  /* 1ª meteor (depois das 3 divs de estrelas) */
-  left: 20%;
-  animation-delay: 0s;
-}
-
-.meteor:nth-of-type(5) {  /* 2ª meteor */
-  left: 60%;
-  animation-delay: 1s;
-}
-
-.meteor:nth-of-type(6) {  /* 3ª meteor */
-  left: 85%;
-  animation-delay: 2s;
-}
-
-@keyframes meteorAnimation {
-  0%   { opacity: 0; transform: translate3d(0,0,0) rotate(45deg); }
-  10%  { opacity: 1; }
-  100% { opacity: 0; transform: translate3d(-500px, 900px, 0) rotate(45deg); }
 }
 
 /* ------------------------------ */
@@ -221,14 +332,23 @@ header p {
 
 /* imagem */
 .slide img {
-  width: 100%;
-  max-width: 420px;   /* deixa a foto grande e bonita */
+  display: block;
+  margin: 0 auto;
+
+  /* largura se adapta, sem estourar o card */
+  width: auto;
+  max-width: min(100%, 420px);
+
+  /* altura limitada pra não cortar nem no PC nem no celular */
   height: auto;
-  max-height: 78vh;   /* foto não passa da tela */
-  object-fit: contain;
+  max-height: min(70vh, 520px);
+
+  object-fit: contain;           /* mostra a foto inteira, sem cortar */
+
   border-radius: 16px;
   box-shadow: 0 0 30px rgba(255, 80, 140, 0.55);
 }
+
 
 /* legenda */
 .caption {
@@ -276,8 +396,23 @@ header p {
 
 /* Esconde setas no celular */
 @media (max-width: 768px) {
-  .nav {
-    display: none;
+  .galeria-slider {
+    max-width: 100%;
+    margin: 40px auto;
+    padding: 0 16px;        /* respiro nas laterais */
+  }
+
+  .slider-container {
+    border-radius: 18px;
+  }
+
+  .slide {
+    padding: 16px 10px 22px;
+  }
+
+  .slide img {
+    max-width: 100%;
+    max-height: 65vh;       /* um pouco mais baixa no celular */
   }
 }
 

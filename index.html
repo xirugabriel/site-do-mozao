@@ -5,103 +5,119 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nosso Cantinho ❤️</title>
 
-  <!-- Conecta o CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- CAMADAS DO CÉU ESTRELADO -->
-  <div class="stars"></div>
-  <div class="stars2"></div>
-  <div class="stars3"></div>
+    <div class="stars-layer far"></div>
+    <div class="stars-layer near"></div>
 
-  <div class="meteor"></div>
-  <div class="meteor"></div>
-  <div class="meteor"></div>
 
-  <!-- Cabeçalho do site -->
-  <header>
-    <h1>Nosso Cantinho ❤️</h1>
-    <p>Um pedacinho do nosso amor guardado aqui</p>
-  </header>
+  <!-- TELA DE SUSPENSE -->
+  <div id="intro" class="intro-screen">
+    <div class="intro-card">
+      <p>Tenho uma coisinha pra te mostrar… 💌</p>
+      <button id="btn-revelar">Clique para ver</button>
+    </div>
+  </div>
 
-  <!-- Tempo que estamos juntos -->
-  <section class="tempo-juntos">
-    <h2>Tempo que estamos juntos ⏱️</h2>
-    <p id="tempo-juntos-texto">
-      carregando...
-    </p>
-  </section>
+  <!-- CONTEÚDO PRINCIPAL (COMEÇA ESCONDIDO) -->
+  <div id="conteudo-principal" class="conteudo">
+    
+    <!-- CAMADAS DO CÉU ESTRELADO -->
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
 
-  <!-- Galeria de fotos -->
-   <section class="galeria-slider">
-    <div class="slider-container">
-      <button class="nav prev">‹</button>
+    <div class="meteor"></div>
 
-      <div class="slider">
-        <div class="slide active">
-          <img src="foto1.jpg" alt="Foto 1">
-          <p class="caption">Um dia antes do te amo 💫</p>
+
+    <!-- Cabeçalho do site -->
+    <header>
+      <h1>Nosso Cantinho ❤️</h1>
+      <p>Um pedacinho do nosso amor guardado aqui</p>
+    </header>
+
+    <!-- Tempo que estamos juntos -->
+    <section class="tempo-juntos">
+      <h2>Tempo que estamos juntos ⏱️</h2>
+      <p id="tempo-juntos-texto">
+        carregando...
+      </p>
+    </section>
+
+    <!-- Galeria de fotos - Carrossel -->
+    <section class="galeria-slider">
+      <div class="slider-container">
+        <button class="nav prev">‹</button>
+
+        <div class="slider">
+          <div class="slide active">
+            <img src="foto1.jpg" alt="Foto 1">
+            <p class="caption">Um dia antes do TE AMO 💫</p>
+          </div>
+
+          <div class="slide">
+            <img src="foto2.jpg" alt="Foto 2">
+            <p class="caption">Um dia simples que virou especial ✨</p>
+          </div>
+
+          <div class="slide">
+            <img src="foto3.jpg" alt="Foto 3">
+            <p class="caption">Marombinhas 💕</p>
+          </div>
+
+          <div class="slide">
+            <img src="foto4.jpg" alt="Foto 4">
+            <p class="caption">E que venham muitos momentos assim 🌙</p>
+          </div>
         </div>
 
-        <div class="slide">
-          <img src="foto2.jpg" alt="Foto 2">
-          <p class="caption">Um dia simples que virou especial ✨</p>
-        </div>
-
-        <div class="slide">
-          <img src="foto3.jpg" alt="Foto 3">
-          <p class="caption">Marombinhas 💕</p>
-        </div>
-
-        <div class="slide">
-          <img src="foto4.jpg" alt="Foto 4">
-          <p class="caption">E que venham muitos momentos assim 🌙</p>
-        </div>
+        <button class="nav next">›</button>
       </div>
 
-      <button class="nav next">›</button>
-    </div>
+      <div class="dots">
+        <button class="dot active" data-index="0"></button>
+        <button class="dot" data-index="1"></button>
+        <button class="dot" data-index="2"></button>
+        <button class="dot" data-index="3"></button>
+      </div>
+    </section>
 
-    <div class="dots">
-      <button class="dot active" data-index="0"></button>
-      <button class="dot" data-index="1"></button>
-      <button class="dot" data-index="2"></button>
-      <button class="dot" data-index="3"></button>
-    </div>
-  </section>
+    <!-- Mensagem -->
+    <section class="mensagem">
+      <h2>Para você, meu amor 💕</h2>
+      <p>
+        Cada momento ao seu lado é único.  
+        Esse site é só um lembrete do quanto você é especial pra mim.
+      </p>
+      <p>
+        Obrigado por tudo que temos vivido juntos.  
+        TE AMO ❤️
+      </p>
+    </section>
 
-  <!-- Mensagem -->
-  <section class="mensagem">
-    <h2>Para você, meu amor 💕</h2>
-    <p>
-      Cada momento ao seu lado é único.  
-      Esse site é só um lembrete do quanto você é especial pra mim.
-    </p>
-    <p>
-      Obrigado por tudo que temos vivido juntos.  
-      TE AMO ❤️
-    </p>
-  </section>
+    <!-- Rodapé -->
+    <footer>
+      Feito com ❤️ por mim, especialmente para você.
+    </footer>
+  </div>
 
-  <!-- Rodapé -->
-  <footer>
-    Feito com ❤️ por mim, especialmente para você.
-  </footer>
-
-    <script>
-    // 🔴 TROQUE A DATA AQUI PELA DE VOCÊS
-    const inicio = new Date('2025-07-20T00:00:00'); 
+  <script>
+    // ===============================
+    //   TIMER "TEMPO JUNTOS"
+    // ===============================
+    const inicio = new Date('2025-07-20T00:00:00'); // TROCAR PELA DATA DE VOCÊS
 
     function atualizarTempo() {
       const agora = new Date();
-      const diffMs = agora - inicio; // diferença em milissegundos
+      const diffMs = agora - inicio;
 
       const segundos = Math.floor(diffMs / 1000);
-      const minutos = Math.floor(segundos / 60);
-      const horas   = Math.floor(minutos / 60);
-      const dias    = Math.floor(horas / 24);
+      const minutos  = Math.floor(segundos / 60);
+      const horas    = Math.floor(minutos / 60);
+      const dias     = Math.floor(horas / 24);
 
       const restoHoras   = horas % 24;
       const restoMinutos = minutos % 60;
@@ -110,23 +126,21 @@
       const texto = `${dias} dias, ${restoHoras} horas, ${restoMinutos} minutos e ${restoSeg} segundos`;
 
       const elemento = document.getElementById('tempo-juntos-texto');
-      if (elemento) {
-        elemento.textContent = texto;
-      }
+      if (elemento) elemento.textContent = texto;
     }
 
-    // atualiza na hora e depois a cada 1 segundo
     atualizarTempo();
     setInterval(atualizarTempo, 1000);
 
-    // ======================================
-    //   CARROSSEL DE FOTOS (JS)
-    // ======================================
-    const slider = document.querySelector('.slider');
-    const slides = document.querySelectorAll('.slide');
-    const dots   = document.querySelectorAll('.dot');
-    const prevBtn = document.querySelector('.nav.prev');
-    const nextBtn = document.querySelector('.nav.next');
+    // ===============================
+    //   CARROSSEL DE FOTOS
+    // ===============================
+    const slider        = document.querySelector('.slider');
+    const slides        = document.querySelectorAll('.slide');
+    const dots          = document.querySelectorAll('.dot');
+    const prevBtn       = document.querySelector('.nav.prev');
+    const nextBtn       = document.querySelector('.nav.next');
+    const sliderCont    = document.querySelector('.slider-container');
 
     let currentSlide = 0;
     let slideInterval;
@@ -146,7 +160,7 @@
 
     function goToSlide(index) {
       const total = slides.length;
-      currentSlide = (index + total) % total; // loop infinito
+      currentSlide = (index + total) % total;
       updateSlider();
     }
 
@@ -158,7 +172,6 @@
       goToSlide(currentSlide - 1);
     }
 
-    // Navegação por setas
     if (prevBtn && nextBtn) {
       prevBtn.addEventListener('click', () => {
         prevSlide();
@@ -171,7 +184,6 @@
       });
     }
 
-    // Navegação pelas bolinhas
     dots.forEach((dot, index) => {
       dot.addEventListener('click', () => {
         goToSlide(index);
@@ -179,35 +191,132 @@
       });
     });
 
-    // Auto-play
     function startAutoplay() {
       stopAutoplay();
-      slideInterval = setInterval(nextSlide, 5000); // troca a cada 5s
+      slideInterval = setInterval(nextSlide, 5000);
     }
 
     function stopAutoplay() {
-      if (slideInterval) {
-        clearInterval(slideInterval);
-      }
+      if (slideInterval) clearInterval(slideInterval);
     }
 
     function resetAutoplay() {
       startAutoplay();
     }
 
-    const sliderContainer = document.querySelector('.slider-container');
-    if (sliderContainer) {
-      sliderContainer.addEventListener('mouseenter', stopAutoplay);
-      sliderContainer.addEventListener('mouseleave', startAutoplay);
-      sliderContainer.addEventListener('touchstart', stopAutoplay, { passive: true });
-      sliderContainer.addEventListener('touchend', startAutoplay, { passive: true });
+    if (sliderCont) {
+      sliderCont.addEventListener('mouseenter', stopAutoplay);
+      sliderCont.addEventListener('mouseleave', startAutoplay);
+      sliderCont.addEventListener('touchstart', stopAutoplay, { passive: true });
+      sliderCont.addEventListener('touchend', startAutoplay, { passive: true });
     }
 
     if (slides.length > 0) {
       updateSlider();
       startAutoplay();
     }
-  </script>
 
+    // ===============================
+    //   TELA DE SUSPENSE / REVELAR
+    // ===============================
+    const intro     = document.getElementById('intro');
+    const btnReveal = document.getElementById('btn-revelar');
+    const conteudo  = document.getElementById('conteudo-principal');
+
+    if (conteudo) {
+      // começa escondido
+      conteudo.classList.remove('visible');
+    }
+
+    if (btnReveal && intro && conteudo) {
+      btnReveal.addEventListener('click', () => {
+        intro.classList.add('fade-out');
+        conteudo.classList.add('visible');
+
+        setTimeout(() => {
+          intro.style.display = 'none';
+        }, 900); // tempo igual ao da animação
+      });
+    } else {
+      // se algo der errado, mostra o conteúdo direto
+      if (conteudo) conteudo.classList.add('visible');
+    }
+
+    function random(min, max) {
+  return min + Math.random() * (max - min);
+}
+
+function spawnMeteor() {
+  const meteor = document.querySelector(".meteor");
+
+  // posição inicial aleatória
+  const startX = random(0, 100);
+  meteor.style.left = `${startX}vw`;
+  meteor.style.top = `110vh`;
+
+  // rastro aleatório
+  meteor.style.height = `${random(140, 260)}px`;
+
+  // brilho aleatório
+  meteor.style.opacity = random(0.55, 1);
+
+  // velocidade
+  const duration = random(0.9, 1.8);
+
+  // ângulo (leve variação)
+  const angle = 33 + Math.random() * 6;
+  const rad = angle * (Math.PI / 180);
+
+  const travelX = 700;
+  const travelY = -1150;
+
+  // reset
+  meteor.style.transition = "none";
+  meteor.style.transform = `translate3d(0, 0, 0) rotate(${angle}deg)`;
+  void meteor.offsetWidth; // reflow
+
+  meteor.style.transition = `transform ${duration}s linear, opacity ${duration}s linear`;
+
+  meteor.style.transform = `translate3d(${travelX}px, ${travelY}px, 0) rotate(${angle}deg)`;
+  meteor.style.opacity = 0;
+
+  // lançar partículas
+  spawnParticles(startX);
+
+  // spawn próximo
+  setTimeout(spawnMeteor, duration * 1000 + random(300, 1400));
+}
+
+// partículas cinematográficas
+function spawnParticles(startX) {
+  const count = Math.floor(random(4, 9));
+
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement("div");
+    p.classList.add("meteor-particle");
+    document.body.appendChild(p);
+
+    p.style.left = `${startX + random(-1, 1)}vw`;
+    p.style.top = `calc(110vh - ${random(0, 20)}px)`;
+    p.style.opacity = random(0.6, 1);
+
+    const duration = random(0.6, 1.6);
+
+    p.style.transition = `transform ${duration}s linear, opacity ${duration}s linear`;
+    void p.offsetWidth;
+
+    p.style.transform = `translate(${random(-120, 120)}px, ${random(-300, -600)}px) scale(${random(0.3, 1.2)})`;
+    p.style.opacity = 0;
+
+    setTimeout(() => {
+      p.remove();
+    }, duration * 1000);
+  }
+}
+
+// start
+setTimeout(spawnMeteor, 500);
+
+  </script>
 </body>
 </html>
