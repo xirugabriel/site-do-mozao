@@ -308,53 +308,8 @@ audio.addEventListener("timeupdate", () => {
     progressBar.style.width = progress + "%";
 });
 
-    // ======= METEOROS RESPONSIVOS E ALEATÓRIOS =======
-function criarMeteoro() {
-  const meteor = document.createElement("div");
-  meteor.className = "meteor";
-
-  // posição horizontal inicial aleatória
-  const startX = Math.random() * window.innerWidth * 0.4; // canto esquerdo
-  const startY = -150; // começa acima da tela
-
-  // posição final (vai para a direita)
-  const endX = startX + (Math.random() * 500 + 300);
-  const endY = startY + (Math.random() * 200 + 100);
-
-  // duração aleatória
-  const duration = Math.random() * 1.2 + 1.8; // entre 1.8s e 3s
-
-  // tamanho do rastro aleatório
-  const size = Math.random() * 50 + 80; // entre 80px e 130px
-  meteor.style.height = size + "px";
-
-  // coloca o meteoro na posição inicial
-  meteor.style.left = startX + "px";
-  meteor.style.top = startY + "px";
-
-  document.body.appendChild(meteor);
-
-  // animação
-  meteor.animate(
-    [
-      { opacity: 0, transform: `translate(0,0) rotate(65deg)` },
-      { opacity: 1, transform: `translate(${endX - startX}px, ${endY - startY}px) rotate(65deg)` },
-      { opacity: 0 }
-    ],
-    {
-      duration: duration * 1000,
-      easing: "ease-out"
-    }
-  );
-
-  // remove após animação
-  setTimeout(() => meteor.remove(), duration * 1000 + 200);
-}
-
-// cria meteoros infinitamente
-setInterval(criarMeteoro, 1200);
-
   </script>
 </body>
 </html>
+
 
