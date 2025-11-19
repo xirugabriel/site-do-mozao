@@ -10,6 +10,8 @@
 
 <body>
 
+    <audio id="bg-music" src="musica.mp3" loop></audio>
+
     <div class="stars-layer far"></div>
     <div class="stars-layer near"></div>
 
@@ -21,6 +23,52 @@
       <button id="btn-revelar">Clique para ver</button>
     </div>
   </div>
+
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const intro = document.getElementById("intro");
+  const btn = document.getElementById("btn-revelar");
+  const music = document.getElementById("bg-music");
+  const conteudo = document.querySelector(".conteudo");
+
+  btn.addEventListener("click", () => {
+
+    // 1️⃣ Revela o site
+    intro.classList.add("fade-out");
+
+    if (conteudo) {
+      conteudo.classList.add("visible");
+    }
+
+    // 2️⃣ Inicia a música
+    if (music) {
+      music.volume = 0.35;
+      music.play().catch(() => {
+        console.log("O navegador só permite tocar música após clique.");
+      });
+    }
+  });
+
+});
+</script>
+
+<div class="music-player">
+    <img src="capa.jpg" class="music-cover" alt="Capa da música">
+    
+    <div class="music-info">
+        <h3 class="music-title">Anjos</h3>
+        <p class="music-artist">Venere Vai Venus</p>
+
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+    </div>
+
+    <button class="music-btn" id="music-btn">⏵</button>
+
+    <audio id="bg-music" src="musica.mp3"></audio>
+</div>
 
   <!-- CONTEÚDO PRINCIPAL (COMEÇA ESCONDIDO) -->
   <div id="conteudo-principal" class="conteudo">
@@ -105,6 +153,7 @@
   </div>
 
   <script>
+    
     // ===============================
     //   TIMER "TEMPO JUNTOS"
     // ===============================
@@ -132,89 +181,6 @@
     atualizarTempo();
     setInterval(atualizarTempo, 1000);
 
-    // ===============================
-    //   CARROSSEL DE FOTOS
-    // ===============================
-    const slider        = document.querySelector('.slider');
-    const slides        = document.querySelectorAll('.slide');
-    const dots          = document.querySelectorAll('.dot');
-    const prevBtn       = document.querySelector('.nav.prev');
-    const nextBtn       = document.querySelector('.nav.next');
-    const sliderCont    = document.querySelector('.slider-container');
-
-    let currentSlide = 0;
-    let slideInterval;
-
-    function updateSlider() {
-      if (!slider) return;
-      slider.style.transform = `translateX(-${currentSlide * 100}%)`;
-
-      slides.forEach((slide, index) => {
-        slide.classList.toggle('active', index === currentSlide);
-      });
-
-      dots.forEach((dot, index) => {
-        dot.classList.toggle('active', index === currentSlide);
-      });
-    }
-
-    function goToSlide(index) {
-      const total = slides.length;
-      currentSlide = (index + total) % total;
-      updateSlider();
-    }
-
-    function nextSlide() {
-      goToSlide(currentSlide + 1);
-    }
-
-    function prevSlide() {
-      goToSlide(currentSlide - 1);
-    }
-
-    if (prevBtn && nextBtn) {
-      prevBtn.addEventListener('click', () => {
-        prevSlide();
-        resetAutoplay();
-      });
-
-      nextBtn.addEventListener('click', () => {
-        nextSlide();
-        resetAutoplay();
-      });
-    }
-
-    dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => {
-        goToSlide(index);
-        resetAutoplay();
-      });
-    });
-
-    function startAutoplay() {
-      stopAutoplay();
-      slideInterval = setInterval(nextSlide, 5000);
-    }
-
-    function stopAutoplay() {
-      if (slideInterval) clearInterval(slideInterval);
-    }
-
-    function resetAutoplay() {
-      startAutoplay();
-    }
-
-    if (sliderCont) {
-      sliderCont.addEventListener('mouseenter', stopAutoplay);
-      sliderCont.addEventListener('mouseleave', startAutoplay);
-      sliderCont.addEventListener('touchstart', stopAutoplay, { passive: true });
-      sliderCont.addEventListener('touchend', startAutoplay, { passive: true });
-    }
-
-    if (slides.length > 0) {
-      updateSlider();
-      startAutoplay();
-    }
 
     // ===============================
     //   TELA DE SUSPENSE / REVELAR
@@ -316,6 +282,31 @@ function spawnParticles(startX) {
 
 // start
 setTimeout(spawnMeteor, 500);
+
+const audio = document.getElementById("bg-music");
+const playBtn = document.getElementById("music-btn");
+const progressBar = document.querySelector(".progress-bar");
+
+let isPlaying = false;
+
+// PLAY / PAUSE
+playBtn.addEventListener("click", () => {
+    if (!isPlaying) {
+        audio.play();
+        playBtn.textContent = "⏸";
+        isPlaying = true;
+    } else {
+        audio.pause();
+        playBtn.textContent = "⏵";
+        isPlaying = false;
+    }
+});
+
+// Atualiza barra de progresso
+audio.addEventListener("timeupdate", () => {
+    const progress = (audio.currentTime / audio.duration) * 100;
+    progressBar.style.width = progress + "%";
+});
 
   </script>
 </body>
