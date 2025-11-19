@@ -282,28 +282,33 @@ header p {
 }
 
 /* ========================================= */
-/*       GALERIA - CARROSSEL REFINADO        */
+/*   GALERIA - CARROSSEL CENTRALIZADO        */
 /* ========================================= */
 
+/* wrapper da galeria ocupa a largura da tela inteira */
 .galeria-slider {
-  max-width: 750px; /* reduz largura no PC */
-  margin: 60px auto;
+  width: 100vw;
+  margin: 60px 0;
 }
 
-/* faixa */
+/* faixa que o JS move com translateX */
 .slider {
   cursor: grab;
   display: flex;
+  width: 100vw;               /* mesma largura da tela */
+  overflow: hidden;
   transition: transform 0.6s ease;
 }
 
-/* cada slide */
+/* cada slide ocupa EXATAMENTE uma largura de tela */
 .slide {
-  min-width: 100%;
+  flex: 0 0 100vw;            /* 1 slide = 100% da tela */
+  box-sizing: border-box;
+
   padding: 30px 20px 40px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center;        /* foto no centro do slide */
   justify-content: center;
 
   /* 3D leve */
@@ -322,11 +327,11 @@ header p {
   filter: blur(0);
 }
 
-/* imagem */
+/* imagem sempre centralizada e sem cortar */
 .slide img {
   display: block;
   margin: 0 auto;
-  max-width: 100%;
+  max-width: 90vw;            /* um respiro nas laterais */
   max-height: 70vh;
   width: auto;
   height: auto;
