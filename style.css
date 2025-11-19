@@ -290,15 +290,6 @@ header p {
   margin: 60px auto;
 }
 
-.slider-container {
-  position: relative;
-  overflow: hidden;
-  border-radius: 22px;
-  background: rgba(10, 0, 30, 0.85);
-  box-shadow: 0 0 30px rgba(255, 80, 170, 0.35);
-  backdrop-filter: blur(8px);
-}
-
 /* faixa */
 .slider {
   display: flex;
@@ -332,31 +323,44 @@ header p {
 
 /* imagem */
 .slide img {
+  max-width: 90vw;      /* ocupa quase toda a tela no celular */
+  max-height: 75vh;     /* evita cortar no PC */
+  width: auto;
+  height: auto;
+  object-fit: contain;
   display: block;
   margin: 0 auto;
 
-  /* largura se adapta, sem estourar o card */
-  width: auto;
-  max-width: min(100%, 420px);
-
-  /* altura limitada pra não cortar nem no PC nem no celular */
-  height: auto;
-  max-height: min(70vh, 520px);
-
-  object-fit: contain;           /* mostra a foto inteira, sem cortar */
-
   border-radius: 16px;
-  box-shadow: 0 0 30px rgba(255, 80, 140, 0.55);
+  box-shadow: 0 0 30px rgba(255, 80, 140, 0.35);
 }
-
 
 /* legenda */
 .caption {
-  margin-top: 14px;
-  font-size: 16px;
+  margin-top: 12px;
+  font-size: 1.1rem;
   text-align: center;
-  opacity: 0.9;
 }
+
+/* seta */
+
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  opacity: 0.7;
+}
+
+.slider-arrow.left {
+  left: -50px;
+}
+
+.slider-arrow.right {
+  right: -50px;
+}
+
+
 
 /* ------------------------------- */
 /*           SETAS (PC)           */
@@ -397,23 +401,46 @@ header p {
 /* Esconde setas no celular */
 @media (max-width: 768px) {
   .galeria-slider {
-    max-width: 100%;
-    margin: 40px auto;
-    padding: 0 16px;        /* respiro nas laterais */
-  }
+  width: 100%;
+  display: flex;
+  justify-content: center;   /* centraliza o slider */
+  margin: 40px auto;
+}
 
-  .slider-container {
-    border-radius: 18px;
-  }
+.slider-container {
+  width: 100%;
+  max-width: 420px;           /* 🔥 Largura perfeita para fotos verticais */
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 22px;
+  padding: 20px 0;
+  background: rgba(20, 0, 40, 0.55);
+  box-shadow: 0 0 40px rgba(200, 80, 255, 0.3);
+}
 
   .slide {
-    padding: 16px 10px 22px;
-  }
+  width: 100%;
+  display: flex;
+  justify-content: center;    /* 🔥 FOTO NO MEIO */
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: 10px;
+}
+
 
   .slide img {
-    max-width: 100%;
-    max-height: 65vh;       /* um pouco mais baixa no celular */
-  }
+  display: block;
+  margin: 0 auto;
+
+  max-width: 100%;
+  height: auto;
+  max-height: 70vh;
+
+  object-fit: contain;
+  border-radius: 18px;
+
+  box-shadow: 0 0 30px rgba(255, 120, 200, 0.4);
+}
 }
 
 /* ------------------------------- */
