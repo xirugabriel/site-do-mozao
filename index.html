@@ -317,63 +317,6 @@ function spawnParticles(startX) {
 // start
 setTimeout(spawnMeteor, 500);
 
-// ===============================
-//   CONTROLE POR ARRASTAR / SWIPE
-// ===============================
-
-let isSwiping = false;
-let startX = 0;
-
-function getClientX(event) {
-  if (event.touches && event.touches.length > 0) {
-    return event.touches[0].clientX;
-  } else if (event.changedTouches && event.changedTouches.length > 0) {
-    return event.changedTouches[0].clientX;
-  } else {
-    return event.clientX;
-  }
-}
-
-function onSwipeStart(e) {
-  isSwiping = true;
-  startX = getClientX(e);
-  if (typeof stopAutoplay === "function") stopAutoplay(); // se você estiver usando autoplay
-}
-
-function onSwipeEnd(e) {
-  if (!isSwiping) return;
-  isSwiping = false;
-
-  const endX = getClientX(e);
-  const diff = endX - startX;
-
-  const LIMITE = 60; // quantos pixels precisa arrastar pra trocar de foto
-
-  if (diff > LIMITE) {
-    // arrastou da esquerda pra direita -> volta uma foto
-    if (typeof prevSlide === "function") prevSlide();
-  } else if (diff < -LIMITE) {
-    // arrastou da direita pra esquerda -> próxima foto
-    if (typeof nextSlide === "function") nextSlide();
-  } else {
-    // arrastou pouco -> fica na mesma
-    if (typeof updateSlider === "function") updateSlider();
-  }
-
-  if (typeof startAutoplay === "function") startAutoplay();
-}
-
-if (slider) {
-  // TOUCH (celular)
-  slider.addEventListener("touchstart", onSwipeStart, { passive: true });
-  slider.addEventListener("touchend", onSwipeEnd);
-
-  // MOUSE (PC)
-  slider.addEventListener("mousedown", onSwipeStart);
-  slider.addEventListener("mouseup", onSwipeEnd);
-  slider.addEventListener("mouseleave", () => { isSwiping = false; });
-}
-
   </script>
 </body>
 </html>

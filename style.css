@@ -282,101 +282,55 @@ header p {
 }
 
 /* ========================================= */
-/*   GALERIA - CARROSSEL CENTRALIZADO        */
+/*       GALERIA - FOTOS EMPILHADAS         */
 /* ========================================= */
 
-/* wrapper da galeria ocupa a largura da tela inteira */
 .galeria-slider {
-  width: 100vw;
-  margin: 60px 0;
+  max-width: 650px;
+  margin: 60px auto;
+  padding: 0 16px;
 }
 
-/* faixa que o JS move com translateX */
+/* não vamos mais usar slider de verdade, 
+   só reaproveitar as classes */
+.slider-container {
+  display: block;
+}
+
 .slider {
-  cursor: grab;
-  display: flex;
-  width: 100vw;               /* mesma largura da tela */
-  overflow: hidden;
-  transition: transform 0.6s ease;
+  display: block;
 }
 
-/* cada slide ocupa EXATAMENTE uma largura de tela */
+/* cada foto vira um “bloco” empilhado */
 .slide {
-  flex: 0 0 100vw;            /* 1 slide = 100% da tela */
-  box-sizing: border-box;
-
-  padding: 30px 20px 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;        /* foto no centro do slide */
-  justify-content: center;
-
-  /* 3D leve */
-  transform: scale(0.93);
-  opacity: 0.55;
-  filter: blur(1px);
-  transition:
-    transform 0.6s ease,
-    opacity 0.6s ease,
-    filter 0.6s ease;
+  margin-bottom: 32px;
+  text-align: center;
 }
 
-.slide.active {
-  transform: scale(1);
-  opacity: 1;
-  filter: blur(0);
-}
-
-/* imagem sempre centralizada e sem cortar */
+/* imagem centralizada e responsiva */
 .slide img {
   display: block;
   margin: 0 auto;
-  max-width: 90vw;            /* um respiro nas laterais */
-  max-height: 70vh;
-  width: auto;
+  width: 100%;
+  max-width: 100%;
   height: auto;
-  object-fit: contain;
+  max-height: 75vh;
+  object-fit: cover;   /* se quiser tudo aparecendo, troque para "contain" */
   border-radius: 18px;
   box-shadow: 0 0 30px rgba(255, 80, 140, 0.35);
 }
 
-/* legenda */
+/* legenda embaixo */
 .caption {
-  margin-top: 12px;
-  font-size: 1.1rem;
+  margin-top: 10px;
+  font-size: 1.05rem;
   text-align: center;
 }
 
+/* some com setas e bolinhas */
 .nav,
-.slider-arrow {
-  display: none !important;
-}
-
-/* ------------------------------- */
-/*      BOLINHAS DO CARROSSEL      */
-/* ------------------------------- */
-
 .dots {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 15px;
-}
-
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-  border: none;
-  background: rgba(255, 255, 255, 0.22);
-  cursor: pointer;
-  transition: 0.25s;
-}
-
-.dot.active {
-  background: #ff80c8;
-  transform: scale(1.25);
-  box-shadow: 0 0 12px rgba(255, 80, 170, 0.9);
+  display: none !important;
 }
 
 /* ------------------------------ */
