@@ -436,3 +436,34 @@ footer {
 .music-btn:hover {
   transform: scale(1.18);
 }
+
+/* PLAYER RESPONSIVO NO CELULAR */
+@media (max-width: 480px) {
+  .music-player {
+    max-width: 300px;
+    padding: 14px;
+    gap: 10px;
+  }
+
+  .music-cover {
+    width: 55px;
+    height: 55px;
+    border-radius: 10px;
+  }
+
+  .music-title {
+    font-size: 0.95rem;
+  }
+
+  .music-artist {
+    font-size: 0.75rem;
+  }
+
+  .music-controls .music-btn {
+    font-size: 18px;
+  }
+
+  .progress-container {
+    height: 4px;
+  }
+}
