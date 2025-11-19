@@ -323,15 +323,14 @@ header p {
 
 /* imagem */
 .slide img {
-  max-width: 90vw;      /* ocupa quase toda a tela no celular */
-  max-height: 75vh;     /* evita cortar no PC */
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  max-height: 70vh;
   width: auto;
   height: auto;
   object-fit: contain;
-  display: block;
-  margin: 0 auto;
-
-  border-radius: 16px;
+  border-radius: 18px;
   box-shadow: 0 0 30px rgba(255, 80, 140, 0.35);
 }
 
