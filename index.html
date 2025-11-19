@@ -35,14 +35,42 @@
   </section>
 
   <!-- Galeria de fotos -->
-  <section class="galeria-slider">
-  <div class="slider">
-    <img src="foto1.jpg" alt="Foto 1">
-    <img src="foto2.jpg" alt="Foto 2">
-    <img src="foto3.jpg" alt="Foto 3">
-    <img src="foto4.jpg" alt="Foto 4">
-  </div>
-</section>
+   <section class="galeria-slider">
+    <div class="slider-container">
+      <button class="nav prev">‹</button>
+
+      <div class="slider">
+        <div class="slide active">
+          <img src="foto1.jpg" alt="Foto 1">
+          <p class="caption">Um dia antes do te amo 💫</p>
+        </div>
+
+        <div class="slide">
+          <img src="foto2.jpg" alt="Foto 2">
+          <p class="caption">Um dia simples que virou especial ✨</p>
+        </div>
+
+        <div class="slide">
+          <img src="foto3.jpg" alt="Foto 3">
+          <p class="caption">Marombinhas 💕</p>
+        </div>
+
+        <div class="slide">
+          <img src="foto4.jpg" alt="Foto 4">
+          <p class="caption">E que venham muitos momentos assim 🌙</p>
+        </div>
+      </div>
+
+      <button class="nav next">›</button>
+    </div>
+
+    <div class="dots">
+      <button class="dot active" data-index="0"></button>
+      <button class="dot" data-index="1"></button>
+      <button class="dot" data-index="2"></button>
+      <button class="dot" data-index="3"></button>
+    </div>
+  </section>
 
   <!-- Mensagem -->
   <section class="mensagem">
@@ -62,7 +90,7 @@
     Feito com ❤️ por mim, especialmente para você.
   </footer>
 
-  <script>
+    <script>
     // 🔴 TROQUE A DATA AQUI PELA DE VOCÊS
     const inicio = new Date('2025-07-20T00:00:00'); 
 
@@ -90,6 +118,96 @@
     // atualiza na hora e depois a cada 1 segundo
     atualizarTempo();
     setInterval(atualizarTempo, 1000);
+
+    // ======================================
+    //   CARROSSEL DE FOTOS (JS)
+    // ======================================
+    const slider = document.querySelector('.slider');
+    const slides = document.querySelectorAll('.slide');
+    const dots   = document.querySelectorAll('.dot');
+    const prevBtn = document.querySelector('.nav.prev');
+    const nextBtn = document.querySelector('.nav.next');
+
+    let currentSlide = 0;
+    let slideInterval;
+
+    function updateSlider() {
+      if (!slider) return;
+      slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+      slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === currentSlide);
+      });
+
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+      });
+    }
+
+    function goToSlide(index) {
+      const total = slides.length;
+      currentSlide = (index + total) % total; // loop infinito
+      updateSlider();
+    }
+
+    function nextSlide() {
+      goToSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      goToSlide(currentSlide - 1);
+    }
+
+    // Navegação por setas
+    if (prevBtn && nextBtn) {
+      prevBtn.addEventListener('click', () => {
+        prevSlide();
+        resetAutoplay();
+      });
+
+      nextBtn.addEventListener('click', () => {
+        nextSlide();
+        resetAutoplay();
+      });
+    }
+
+    // Navegação pelas bolinhas
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        goToSlide(index);
+        resetAutoplay();
+      });
+    });
+
+    // Auto-play
+    function startAutoplay() {
+      stopAutoplay();
+      slideInterval = setInterval(nextSlide, 5000); // troca a cada 5s
+    }
+
+    function stopAutoplay() {
+      if (slideInterval) {
+        clearInterval(slideInterval);
+      }
+    }
+
+    function resetAutoplay() {
+      startAutoplay();
+    }
+
+    const sliderContainer = document.querySelector('.slider-container');
+    if (sliderContainer) {
+      sliderContainer.addEventListener('mouseenter', stopAutoplay);
+      sliderContainer.addEventListener('mouseleave', startAutoplay);
+      sliderContainer.addEventListener('touchstart', stopAutoplay, { passive: true });
+      sliderContainer.addEventListener('touchend', startAutoplay, { passive: true });
+    }
+
+    if (slides.length > 0) {
+      updateSlider();
+      startAutoplay();
+    }
   </script>
+
 </body>
 </html>

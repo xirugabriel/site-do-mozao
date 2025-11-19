@@ -171,46 +171,141 @@ header p {
 }
 
 /* ========================================= */
-/*          GALERIA — SLIDER MOBILE          */
+/*       GALERIA - CARROSSEL REFINADO        */
 /* ========================================= */
 
 .galeria-slider {
-  margin: 40px auto;
-  width: 100%;
-  overflow: hidden;
-  padding: 10px 0;
+  max-width: 750px; /* reduz largura no PC */
+  margin: 60px auto;
 }
 
+.slider-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  background: rgba(10, 0, 30, 0.85);
+  box-shadow: 0 0 30px rgba(255, 80, 170, 0.35);
+  backdrop-filter: blur(8px);
+}
+
+/* faixa */
 .slider {
   display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  gap: 20px;
-  padding: 20px;
-  scrollbar-width: none; /* Firefox */
+  transition: transform 0.6s ease;
 }
 
-/* tira a barra no Chrome */
-.slider::-webkit-scrollbar {
-  display: none;
+/* cada slide */
+.slide {
+  min-width: 100%;
+  padding: 30px 20px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  /* 3D leve */
+  transform: scale(0.93);
+  opacity: 0.55;
+  filter: blur(1px);
+  transition:
+    transform 0.6s ease,
+    opacity 0.6s ease,
+    filter 0.6s ease;
 }
 
-.slider img {
-  flex: 0 0 85%;
-  max-width: 85%;
-  height: auto;              /* deixa a altura se ajustar */
-  max-height: 70vh;          /* não passa da altura da tela */
-  object-fit: contain;       /* mostra a foto inteira sem cortar */
-  border-radius: 18px;
-  scroll-snap-align: center;
-  box-shadow: 0 0 25px rgba(255, 80, 140, 0.35);
-  transition: transform 0.3s ease;
-  background: rgba(0, 0, 0, 0.4); /* se sobrar espaço, fica um fundinho escuro */
+.slide.active {
+  transform: scale(1);
+  opacity: 1;
+  filter: blur(0);
 }
 
-/* efeito no hover, no PC */
-.slider img:hover {
-  transform: scale(1.05);
+/* imagem */
+.slide img {
+  width: 100%;
+  max-width: 420px;   /* deixa a foto grande e bonita */
+  height: auto;
+  max-height: 78vh;   /* foto não passa da tela */
+  object-fit: contain;
+  border-radius: 16px;
+  box-shadow: 0 0 30px rgba(255, 80, 140, 0.55);
+}
+
+/* legenda */
+.caption {
+  margin-top: 14px;
+  font-size: 16px;
+  text-align: center;
+  opacity: 0.9;
+}
+
+/* ------------------------------- */
+/*           SETAS (PC)           */
+/* ------------------------------- */
+
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
+  backdrop-filter: blur(6px);
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.nav.prev {
+  left: 8px; /* aproxima da foto */
+}
+
+.nav.next {
+  right: 8px;
+}
+
+.nav:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.12);
+}
+
+/* Esconde setas no celular */
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+  }
+}
+
+/* ------------------------------- */
+/*      BOLINHAS DO CARROSSEL      */
+/* ------------------------------- */
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(255, 255, 255, 0.22);
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.dot.active {
+  background: #ff80c8;
+  transform: scale(1.25);
+  box-shadow: 0 0 12px rgba(255, 80, 170, 0.9);
 }
 
 /* ------------------------------ */
